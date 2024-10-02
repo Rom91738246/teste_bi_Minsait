@@ -1,0 +1,14 @@
+body {
+    padding: 20px;
+}
+
+.chart-container {
+    margin-top: 20px;
+    position: relative;
+    width: 80%;
+    margin: auto;
+
+.chart-legend {
+    text-align: center;
+    margin-top: 10px;
+}

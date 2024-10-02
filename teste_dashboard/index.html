@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Saúde Pública</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .chart-container {
+            width: 48%;
+            height: 400px;
+            margin: 1%;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+		h2 {
+			text-align: center; /* Centraliza o subtítulo */
+			margin-bottom: 40px;
+			color: #6c757d;
+		}
+		footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard de Saúde Pública - Goiás</h1>
+		<h2>Casos de Tuberculose</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="faixaEtaria">Selecione a Faixa Etária:</label>
+                    <select id="faixaEtaria" class="form-control">
+                        <option value="">Todas</option>
+                        <option value="15 a 34 ANOS">15 a 34 ANOS</option>
+                        <option value="35 a 64 ANOS">35 a 64 ANOS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="sexo">Selecione o Sexo:</label>
+                    <select id="sexo" class="form-control">
+                        <option value="">Todos</option>
+                        <option value="MASCULINO">Masculino</option>
+                        <option value="FEMININO">Feminino</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="racaCor">Selecione a Raça/Cor:</label>
+                    <select id="racaCor" class="form-control">
+                        <option value="">Todas</option>
+                        <option value="BRANCA">Branca</option>
+                        <option value="PARDA">Parda</option>
+                        <option value="PRETA">Preta</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="municipio">Selecione o Município:</label>
+                    <select id="municipio" class="form-control">
+                        <option value="">Todos</option>
+                        <!-- Adicione todos os 247 municípios do estado de Goiás aqui -->
+                        <option value="ABADIA DE GOIAS">Abadia de Goiás</option>
+                        <option value="ABADIANIA">Abadiânia</option>
+                        <option value="ACREUNA">Acreúna</option>
+                        <option value="ADELANDIA">Adelândia</option>
+                        <option value="AGUA FRIA DE GOIAS">Água Fria de Goiás</option>
+                        <option value="AGUAS LINDAS DE GOIAS">Águas Lindas de Goiás</option>
+                        <option value="ALEXANIA">Alexânia</option>
+                        <option value="ALOANDIA">Aloândia</option>
+                        <option value="ALTO HORIZONTE">Alto Horizonte</option>
+                        <option value="ALTO PARAISO DE GOIAS">Alto Paraíso de Goiás</option>
+                        <option value="ALVORADA DO NORTE">Alvorada do Norte</option>
+                        <option value="AMARALINA">Amaralina</option>
+                        <option value="AMERICANO DO BRASIL">Americano do Brasil</option>
+                        <option value="AMORINOPOLIS">Amorinópolis</option>
+                        <option value="ANAPOLIS">Anápolis</option>
+                        <option value="ANHANGUERA">Anhanguera</option>
+                        <option value="ANICUNS">Anicuns</option>
+                        <option value="APARECIDA DE GOIANIA">Aparecida de Goiânia</option>
+                        <option value="APARECIDA DO RIO DOCE">Aparecida do Rio Doce</option>
+                        <option value="APORE">Aporé</option>
+                        <option value="ARACU">Araçu</option>
+                        <option value="ARAGARCAS">Aragarças</option>
+                        <option value="ARAGOIANIA">Aragoiânia</option>
+                        <option value="ARAGUAPAZ">Araguapaz</option>
+                        <option value="ARENOPOLIS">Arenópolis</option>
+                        <option value="ARUANA">Aruanã</option>
+                        <option value="AURILANDIA">Aurilândia</option>
+                        <option value="AVELINOPOLIS">Avelinópolis</option>
+                        <option value="BALIZA">Baliza</option>
+                        <option value="BARRO ALTO">Barro Alto</option>
+                        <option value="BELA VISTA DE GOIAS">Bela Vista de Goiás</option>
+                        <option value="BOM JARDIM DE GOIAS">Bom Jardim de Goiás</option>
+                        <option value="BOM JESUS DE GOIAS">Bom Jesus de Goiás</option>
+                        <option value="BONFINOPOLIS">Bonfinópolis</option>
+                        <option value="BONOPOLIS">Bonópolis</option>
+                        <option value="BRAZABRANTES">Brazabrantes</option>
+                        <option value="BRITANIA">Britânia</option>
+                        <option value="BURITI ALEGRE">Buriti Alegre</option>
+                        <option value="BURITI DE GOIAS">Buriti de Goiás</option>
+                        <option value="BURITINOPOLIS">Buritinópolis</option>
+                        <option value="CABECEIRAS">Cabeceiras</option>
+                        <option value="CACHOEIRA ALTA">Cachoeira Alta</option>
+                        <option value="CACHOEIRA DE GOIAS">Cachoeira de Goiás</option>
+                        <option value="CACHOEIRA DOURADA">Cachoeira Dourada</option>
+                        <option value="CAIAPONIA">Caiapônia</option>
+                        <option value="CALDAS NOVAS">Caldas Novas</option>
+                        <option value="CALDAZINHA">Caldazinha</option>
+                        <option value="CAMPESTRE DE GOIAS">Campestre de Goiás</option>
+                        <option value="CAMPINACU">Campinaçu</option>
+                        <option value="CAMPINORTE">Campinorte</option>
+                        <option value="CAMPO ALEGRE DE GOIAS">Campo Alegre de Goiás</option>
+                        <option value="CAMPO LIMPO DE GOIAS">Campo Limpo de Goiás</option>
+                        <option value="CAMPOS BELOS">Campos Belos</option>
+                        <option value="CAMPOS VERDES">Campos Verdes</option>
+                        <option value="CARMO DO RIO VERDE">Carmo do Rio Verde</option>
+                        <option value="CASTELANDIA">Castelândia</option>
+                        <option value="CATALAO">Catalão</option>
+                        <option value="CATURAI">Caturaí</option>
+                        <option value="CAVALCANTE">Cavalcante</option>
+                        <option value="CERES">Ceres</option>
+                        <option value="CEZARINA">Cezarina</option>
+                        <option value="CHAPADAO DO CEU">Chapadão do Céu</option>
+                        <option value="CIDADE OCIDENTAL">Cidade Ocidental</option>
+                        <option value="COCALZINHO DE GOIAS">Cocalzinho de Goiás</option>
+                        <option value="COLINAS DO SUL">Colinas do Sul</option>
+                        <option value="CORREGO DO OURO">Córrego do Ouro</option>
+                        <option value="CORUMBA DE GOIAS">Corumbá de Goiás</option>
+                        <option value="CORUMBAIBA">Corumbaíba</option>
+                        <option value="CRISTALINA">Cristalina</option>
+                        <option value="CRISTIANOPOLIS">Cristianópolis</option>
+                        <option value="CRIXAS">Crixás</option>
+                        <option value="CROMINIA">Cromínia</option>
+                        <option value="CUMARI">Cumari</option>
+                        <option value="DAMIANOPOLIS">Damianópolis</option>
+                        <option value="DAMOLANDIA">Damolândia</option>
+                        <option value="DAVINOPOLIS">Davinópolis</option>
+                        <option value="DIORAMA">Diorama</option>
+                        <option value="DIVINOPOLIS DE GOIAS">Divinópolis de Goiás</option>
+                        <option value="DOVERLANDIA">Doverlândia</option>
+                        <option value="EDEALINA">Edealina</option>
+                        <option value="EDEIA">Edéia</option>
+                        <option value="ESTRELA DO NORTE">Estrela do Norte</option>
+                        <option value="FAINA">Faina</option>
+                        <option value="FAZENDA NOVA">Fazenda Nova</option>
+                        <option value="FIRMINOPOLIS">Firminópolis</option>
+                        <option value="FLORES DE GOIAS">Flores de Goiás</option>
+                        <option value="FORMOSA">Formosa</option>
+                        <option value="FORMOSO">Formoso</option>
+                        <option value="GAMELEIRA DE GOIAS">Gameleira de Goiás</option>
+                        <option value="GOIANAPOLIS">Goianápolis</option>
+                        <option value="GOIANDIRA">Goiandira</option>
+                        <option value="GOIANESIA">Goianésia</option>
+                        <option value="GOIANIA">Goiânia</option>
+                        <option value="GOIANIRA">Goianira</option>
+                        <option value="GOIAS">Goiás</option>
+                        <option value="GOIATUBA">Goiatuba</option>
+                        <option value="GOUVELANDIA">Gouvelândia</option>
+                        <option value="GUAPO">Guapó</option>
+                        <option value="GUARAITA">Guaraíta</option>
+                        <option value="GUARANI DE GOIAS">Guarani de Goiás</option>
+                        <option value="GUARINOS">Guarinos</option>
+                        <option value="HEITORAI">Heitoraí</option>
+                        <option value="HIDROLANDIA">Hidrolândia</option>
+                        <option value="HIDROLINA">Hidrolina</option>
+                        <option value="IACIARA">Iaciara</option>
+                        <option value="INACIOLANDIA">Inaciolândia</option>
+                        <option value="INDIARA">Indiara</option>
+                        <option value="INHUMAS">Inhumas</option>
+                        <option value="IPAMERI">Ipameri</option>
+                        <option value="IPIRANGA DE GOIAS">Ipiranga de Goiás</option>
+                        <option value="IPORA">Iporá</option>
+                        <option value="ISRAELANDIA">Israelândia</option>
+                        <option value="ITABERAI">Itaberaí</option>
+                        <option value="ITAGUARI">Itaguari</option>
+                        <option value="ITAGUARU">Itaguaru</option>
+                        <option value="ITAJA">Itajá</option>
+                        <option value="ITAPACI">Itapaci</option>
+                        <option value="ITAPIRAPUA">Itapirapuã</option>
+                        <option value="ITAPURANGA">Itapuranga</option>
+                        <option value="ITARUMA">Itarumã</option>
+                        <option value="ITAUCU">Itauçu</option>
+                        <option value="ITUMBIARA">Itumbiara</option>
+                        <option value="IVOLANDIA">Ivolândia</option>
+                        <option value="JANDAIA">Jandaia</option>
+                        <option value="JARAGUA">Jaraguá</option>
+                        <option value="JATAI">Jataí</option>
+                        <option value="JAUPACI">Jaupaci</option>
+                        <option value="JESUPOLIS">Jesúpolis</option>
+                        <option value="JOVIANIA">Joviânia</option>
+                        <option value="JUSSARA">Jussara</option>
+                        <option value="LEOPOLDO DE BULHOES">Leopoldo de Bulhões</option>
+                        <option value="LUZIANIA">Luziânia</option>
+                        <option value="MAIRIPOTABA">Mairipotaba</option>
+                        <option value="MAMBAI">Mambaí</option>
+                        <option value="MARA ROSA">Mara Rosa</option>
+                        <option value="MARZAGAO">Marzagão</option>
+                        <option value="MATRINCHA">Matrinchã</option>
+                        <option value="MAURILANDIA">Maurilândia</option>
+                        <option value="MIMOSO DE GOIAS">Mimoso de Goiás</option>
+                        <option value="MINACU">Minaçu</option>
+                        <option value="MINEIROS">Mineiros</option>
+                        <option value="MOIPORA">Moiporá</option>
+                        <option value="MONTE ALEGRE DE GOIAS">Monte Alegre de Goiás</option>
+                        <option value="MONTES CLAROS DE GOIAS">Montes Claros de Goiás</option>
+                        <option value="MONTIVIDIU">Montividiu</option>
+                        <option value="MONTIVIDIU DO NORTE">Montividiu do Norte</option>
+                        <option value="MORRINHOS">Morrinhos</option>
+                        <option value="MORRO AGUDO DE GOIAS">Morro Agudo de Goiás</option>
+                        <option value="MOSSAMEDES">Mossâmedes</option>
+                        <option value="MOZARLANDIA">Mozarlândia</option>
+                        <option value="MUNDO NOVO">Mundo Novo</option>
+                        <option value="MUTUNOPOLIS">Mutunópolis</option>
+                        <option value="NAZARIO">Nazário</option>
+                        <option value="NEROPOLIS">Nerópolis</option>
+                        <option value="NIQUELANDIA">Niquelândia</option>
+                        <option value="NOVA AMERICA">Nova América</option>
+                        <option value="NOVA AURORA">Nova Aurora</option>
+                        <option value="NOVA CRIXAS">Nova Crixás</option>
+                        <option value="NOVA GLORIA">Nova Glória</option>
+                        <option value="NOVA IGUACU DE GOIAS">Nova Iguaçu de Goiás</option>
+                        <option value="NOVA ROMA">Nova Roma</option>
+                        <option value="NOVA VENEZA">Nova Veneza</option>
+                        <option value="NOVO BRASIL">Novo Brasil</option>
+                        <option value="NOVO GAMA">Novo Gama</option>
+                        <option value="NOVO PLANALTO">Novo Planalto</option>
+                        <option value="ORIZONA">Orizona</option>
+                        <option value="OURO VERDE DE GOIAS">Ouro Verde de Goiás</option>
+                        <option value="OUVIDOR">Ouvidor</option>
+                        <option value="PADRE BERNARDO">Padre Bernardo</option>
+                        <option value="PALESTINA DE GOIAS">Palestina de Goiás</option>
+                        <option value="PALMEIRAS DE GOIAS">Palmeiras de Goiás</option>
+                        <option value="PALMELO">Palmelo</option>
+                        <option value="PALMINOPOLIS">Palminópolis</option>
+                        <option value="PANAMA">Panamá</option>
+                        <option value="PARANAIGUARA">Paranaiguara</option>
+                        <option value="PARAUNA">Paraúna</option>
+                        <option value="PEROLANDIA">Perolândia</option>
+                        <option value="PETROLINA DE GOIAS">Petrolina de Goiás</option>
+                        <option value="PILAR DE GOIAS">Pilar de Goiás</option>
+                        <option value="PIRACANJUBA">Piracanjuba</option>
+                        <option value="PIRANHAS">Piranhas</option>
+                        <option value="PIRENOPOLIS">Pirenópolis</option>
+                        <option value="PIRES DO RIO">Pires do Rio</option>
+                        <option value="PLANALTINA">Planaltina</option>
+                        <option value="PONTALINA">Pontalina</option>
+                        <option value="PORANGATU">Porangatu</option>
+                        <option value="PORTEIRAO">Porteirão</option>
+                        <option value="PORTELANDIA">Portelândia</option>
+                        <option value="POSSE">Posse</option>
+                        <option value="PROFESSOR JAMIL">Professor Jamil</option>
+                        <option value="QUIRINOPOLIS">Quirinópolis</option>
+                        <option value="RIALMA">Rialma</option>
+                        <option value="RIANAPOLIS">Rianápolis</option>
+                        <option value="RIO QUENTE">Rio Quente</option>
+                        <option value="RIO VERDE">Rio Verde</option>
+                        <option value="RUBIATABA">Rubiataba</option>
+                        <option value="SANCLERLANDIA">Sanclerlândia</option>
+                        <option value="SANCLERLANDIA">Sanclerlândia</option>
+                        <option value="SANTA BARBARA DE GOIAS">Santa Bárbara de Goiás</option>
+                        <option value="SANTA CRUZ DE GOIAS">Santa Cruz de Goiás</option>
+                        <option value="SANTA FE DE GOIAS">Santa Fé de Goiás</option>
+                        <option value="SANTA HELENA DE GOIAS">Santa Helena de Goiás</option>
+                        <option value="SANTA ISABEL">Santa Isabel</option>
+                        <option value="SANTA RITA DO ARAGUAIA">Santa Rita do Araguaia</option>
+                        <option value="SANTA RITA DO NOVO DESTINO">Santa Rita do Novo Destino</option>
+                        <option value="SANTA ROSA DE GOIAS">Santa Rosa de Goiás</option>
+                        <option value="SANTA TEREZA DE GOIAS">Santa Tereza de Goiás</option>
+                        <option value="SANTA TEREZINHA DE GOIAS">Santa Terezinha de Goiás</option>
+                        <option value="SANTO ANTONIO DA BARRA">Santo Antônio da Barra</option>
+                        <option value="SANTO ANTONIO DE GOIAS">Santo Antônio de Goiás</option>
+                        <option value="SANTO ANTONIO DO DESCOBERTO">Santo Antônio do Descoberto</option>
+                        <option value="SAO DOMINGOS">São Domingos</option>
+                        <option value="SAO FRANCISCO DE GOIAS">São Francisco de Goiás</option>
+                        <option value="SAO JOAO D'ALIANCA">São João d'Aliança</option>
+                        <option value="SAO JOAO DA PARAUNA">São João da Paraúna</option>
+                        <option value="SAO LUIS DE MONTES BELOS">São Luís de Montes Belos</option>
+                        <option value="SAO LUIZ DO NORTE">São Luiz do Norte</option>
+                        <option value="SAO MIGUEL DO ARAGUAIA">São Miguel do Araguaia</option>
+                        <option value="SAO MIGUEL DO PASSA QUATRO">São Miguel do Passa Quatro</option>
+                        <option value="SAO PATRICIO">São Patrício</option>
+                        <option value="SAO SIMAO">São Simão</option>
+                        <option value="SENADOR CANEDO">Senador Canedo</option>
+                        <option value="SERRANOPOLIS">Serranópolis</option>
+                        <option value="SILVANIA">Silvânia</option>
+                        <option value="SIMOLANDIA">Simolândia</option>
+                        <option value="SITIO D'ABADIA">Sítio d'Abadia</option>
+                        <option value="TAQUARAL DE GOIAS">Taquaral de Goiás</option>
+                        <option value="TERESINA DE GOIAS">Teresina de Goiás</option>
+                        <option value="TEREZOPOLIS DE GOIAS">Terezópolis de Goiás</option>
+                        <option value="TRES RANCHOS">Três Ranchos</option>
+                        <option value="TRINDADE">Trindade</option>
+                        <option value="TROMBAS">Trombas</option>
+                        <option value="TURVANIA">Turvânia</option>
+                        <option value="TURVELANDIA">Turvelândia</option>
+                        <option value="UIRAPURU">Uirapuru</option>
+                        <option value="URUACU">Uruaçu</option>
+                        <option value="URUANA">Uruana</option>
+                        <option value="URUTAI">Urutaí</option>
+                        <option value="VALPARAISO DE GOIAS">Valparaíso de Goiás</option>
+                        <option value="VARJAO">Varjão</option>
+                        <option value="VIANOPOLIS">Vianópolis</option>
+                        <option value="VICENTINOPOLIS">Vicentinópolis</option>
+                        <option value="VILA BOA">Vila Boa</option>
+                        <option value="VILA PROPICIO">Vila Propício</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="main1" class="chart-container"></div>
+            <div id="main2" class="chart-container"></div>
+        </div>
+        <div class="row">
+            <div id="main3" class="chart-container"></div>
+            <div id="main4" class="chart-container"></div>
+        </div>
+        <div class="row">
+            <div id="main5" class="chart-container"></div>
+            <div id="main6" class="chart-container"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const faixaEtariaSelect = document.getElementById('faixaEtaria');
+            const sexoSelect = document.getElementById('sexo');
+            const racaCorSelect = document.getElementById('racaCor');
+            const municipioSelect = document.getElementById('municipio');
+
+            faixaEtariaSelect.addEventListener('change', updateCharts);
+            sexoSelect.addEventListener('change', updateCharts);
+            racaCorSelect.addEventListener('change', updateCharts);
+            municipioSelect.addEventListener('change', updateCharts);
+
+            fetch('https://dados.saude.go.gov.br/api/3/action/datastore_search?resource_id=5a4b5bbe-98c6-4d7c-8aed-d5de162dc605&limit=50000')
+                .then(response => response.json())
+                .then(data => {
+                    window.records = data.result.records;
+                    updateCharts();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+
+            function updateCharts() {
+                const selectedFaixaEtaria = faixaEtariaSelect.value;
+                const selectedSexo = sexoSelect.value;
+                const selectedRacaCor = racaCorSelect.value;
+                const selectedMunicipio = municipioSelect.value;
+
+                const filteredRecords = window.records.filter(record => {
+                    return (selectedFaixaEtaria === "" || record.faixa_etaria === selectedFaixaEtaria) &&
+                           (selectedSexo === "" || record.sexo === selectedSexo) &&
+                           (selectedRacaCor === "" || record.raca_cor === selectedRacaCor) &&
+                           (selectedMunicipio === "" || record.dmun_municipiox  === selectedMunicipio);
+                });
+
+
+
+                const municipios = [...new Set(filteredRecords.map(record => record.dmun_regiao_saudex))];
+                const notificacoesPorMunicipio = municipios.map(municipio => {
+                    return filteredRecords.filter(record => record.dmun_regiao_saudex === municipio).length;
+                });
+                const casosPorSexo = ['MASCULINO', 'FEMININO'].map(sexo => {
+                    return filteredRecords.filter(record => record.sexo === sexo).length;
+                });
+                const faixaEtariaData = [...new Set(filteredRecords.map(record => record.faixa_etaria))];
+                const casosPorFaixaEtaria = faixaEtariaData.map(faixa => {
+                    return filteredRecords.filter(record => record.faixa_etaria === faixa).length;
+                });
+
+                const agravoMap = {
+                    1: 'Sim',
+                    2: 'Não',
+                    9: 'Ignorado'
+                };
+
+                const agravoOutroData = Object.values(agravoMap).map(categoria => {
+                    return filteredRecords.filter(record => agravoMap[record.st_agravo_outro] === categoria).length;
+                });
+
+                const agravoDrogasData = Object.values(agravoMap).map(categoria => {
+                    return filteredRecords.filter(record => agravoMap[record.st_agravo_drogas] === categoria).length;
+                });
+
+                const cidades = [...new Set(filteredRecords.map(record => record.dmun_municipiox))];
+				const contatoExaminadoPorMunicipio = cidades.map(cidades => {
+                    return filteredRecords
+                        .filter(record => record.dmun_municipiox === cidades)
+                        .reduce((sum, record) => sum + record.nu_contato_examinado, 0);
+                });
+
+                // Gráfico 1: Notificações por Município
+                const chartDom1 = document.getElementById('main1');
+                const myChart1 = echarts.init(chartDom1);
+                const option1 = {
+                    title: {
+                        text: 'Notificações por Região'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['Notificações']
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: municipios
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        name: 'notificacoesPorRegiao',
+                        type: 'bar',
+                        data: notificacoesPorMunicipio,
+                        itemStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0, color: '#003366' // cor inicial
+                                }, {
+                                    offset: 1, color: '#336699' // cor final
+                                }],
+                                global: false
+                            }
+                        },
+                        label: {
+                            show: true,
+                            position: 'top'
+                        }
+                    }]
+                };
+                myChart1.setOption(option1);
+
+                // Gráfico 2: Casos por Sexo
+                const chartDom2 = document.getElementById('main2');
+				const myChart2 = echarts.init(chartDom2);
+				const option2 = {
+					title: {
+						text: 'Casos por Sexo'
+					},
+					tooltip: {
+						trigger: 'axis'
+					},
+					legend: {
+						data: ['Masculino', 'Feminino'],
+						bottom: 0 // Posiciona a legenda na parte inferior
+					},
+					xAxis: {
+						type: 'category',
+						data: ['Masculino', 'Feminino']
+					},
+					yAxis: {
+						type: 'value'
+					},
+					series: [{
+						name: 'Masculino',
+						type: 'bar',
+						data: [filteredRecords.filter(record => record.sexo === 'MASCULINO').length],
+						itemStyle: {
+							color: {
+								type: 'linear',
+								x: 0,
+								y: 0,
+								x2: 0,
+								y2: 1,
+								colorStops: [{
+									offset: 0, color: '#0000FF' // cor inicial
+								}, {
+									offset: 1, color: '#87CEFA' // cor final
+								}],
+								global: false
+							}
+						},
+						label: {
+							show: true,
+							position: 'top'
+						}
+					}, {
+						name: 'Feminino',
+						type: 'bar',
+						data: [null, filteredRecords.filter(record => record.sexo === 'FEMININO').length],
+						itemStyle: {
+							color: {
+								type: 'linear',
+								x: 0,
+								y: 0,
+								x2: 0,
+								y2: 1,
+								colorStops: [{
+									offset: 0, color: '#FF69B4' // cor inicial
+								}, {
+									offset: 1, color: '#FFB6C1' // cor final
+								}],
+								global: false
+							}
+						},
+						label: {
+							show: true,
+							position: 'top'
+						}
+					}]
+				};
+				myChart2.setOption(option2);
+
+                // Gráfico 3: Distribuição de Casos por Faixa Etária
+                const chartDom3 = document.getElementById('main3');
+                const myChart3 = echarts.init(chartDom3);
+                const option3 = {
+                    title: {
+                        text: 'Distribuição de Casos por Faixa Etária'
+                    },
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        data: faixaEtariaData, 
+						bottom: 0 // Posiciona a legenda na parte inferior
+                    },
+                    series: [{
+                        type: 'pie',
+                        radius: '50%',
+                        data: faixaEtariaData.map((faixa, index) => ({
+                            value: casosPorFaixaEtaria[index],
+                            name: faixa
+                        })),
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        },
+                        label: {
+                            show: true,
+                            formatter: '{b}: {c} ({d}%)'
+                        }
+                    }]
+                };
+                myChart3.setOption(option3);
+
+                // Gráfico 4: Quantidade de Doenças e Agravos Associados Outras
+                const chartDom4 = document.getElementById('main4');
+                const myChart4 = echarts.init(chartDom4);
+                const option4 = {
+                    title: {
+                        text: 'Quantidade de Doenças e Agravos Associados Outras'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: Object.values(agravoMap)
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: Object.values(agravoMap)
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        name: 'Doenças e Agravos Associados Outras',
+                        type: 'line',
+                        data: agravoOutroData,
+                        itemStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0, color: '#008000' // cor inicial
+                                }, {
+                                    offset: 1, color: '#00FF00' // cor final
+                                }],
+                                global: false
+                            }
+                        },
+                        label: {
+                            show: true,
+                            position: 'top'
+                        }
+                    }]
+                };
+                myChart4.setOption(option4);
+
+                // Gráfico 5: Quantidade de Doenças e Agravos Associados por Drogas
+                const chartDom5 = document.getElementById('main5');
+                const myChart5 = echarts.init(chartDom5);
+                const option5 = {
+                    title: {
+                        text: 'Quantidade de Doenças e Agravos Associados por Drogas'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: Object.values(agravoMap)
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: Object.values(agravoMap)
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        name: 'Doenças e Agravos Associados por Drogas',
+                        type: 'bar',
+                        data: agravoDrogasData,
+                        itemStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0, color: '#FF0000' // cor inicial
+                                }, {
+                                    offset: 1, color: '#FFA07A' // cor final
+                                }],
+                                global: false
+                            }
+                        },
+                        label: {
+                            show: true,
+                            position: 'top'
+                        }
+                    }]
+                };
+                myChart5.setOption(option5);
+
+                // Gráfico 6: Número de Contatos Examinados por Município
+                const chartDom6 = document.getElementById('main6');
+                const myChart6 = echarts.init(chartDom6);
+                const option6 = {
+                    title: {
+                        text: 'Número de Contatos Examinados por Município'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['Contatos Examinados']
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: cidades
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        name: 'Contatos Examinados',
+                        type: 'line',
+                        data: contatoExaminadoPorMunicipio,
+                        itemStyle: {
+                            color: function (params) {
+                                const value = params.value;
+                                if (value < 50) {
+                                    return '#FF0000'; // vermelho
+                                } else if (value < 100) {
+                                    return '#FFFF00'; // amarelo
+                                } else {
+                                    return '#008000'; // verde
+                                }
+                            }
+                        },
+                        label: {
+                            show: true,
+                            position: 'top'
+                        }
+                    }]
+                };
+                myChart6.setOption(option6);
+            }
+        });
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+</body>
+<footer>
+        Desenvolvido por: Romario Costa Campos
+</footer>
+</html>
